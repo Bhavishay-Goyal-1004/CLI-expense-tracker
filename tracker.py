@@ -62,7 +62,11 @@ while True:
     print("3. Filter by category.")
     print("4. Exit")
 
-    ch=int(input("Enter Choice: "))
+    try: 
+        ch = int(input("Enter Choice: ")) 
+    except ValueError: 
+        print("Invalid input! Please enter a number.\n") 
+        continue
 
     if (ch==1):
         add_expense()
