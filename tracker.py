@@ -39,18 +39,24 @@ def filter_category():
     file = open("expense.txt","r")
     category_i=input("Enter the category to view expenses: ")
     total=0
-    next(file)
-    print("Date\tAmount\tCategory\tNote")
+    print("\n==============================================================") 
+    print(f"{'Date':<15}{'Amount':<12}{'Category':<18}{'Note'}") 
+    print("==============================================================")
     for line in file:
+        line = line.strip() 
+        if line == "": 
+            continue
         date,amt,category,note=line.split(",")
-        if (category==category_i):
+        if (category.lower()==category_i.lower()):
             print(f"{date}\t{amt}\t{category}\t{note}")
             total+=float(amt)
-    print("Subtotal Expense: ",total)
+    print("==============================================================") 
+    print(f"Subtotal Expense: {total}") 
+    print("==============================================================\n") 
     file.close()
 
 while True:
-    print("========Welcome to Expense Tracker!========")
+    print("======== Welcome to Expense Tracker! ========")
     print("1. Add an expense.")
     print("2. View all expenses.")
     print("3. Filter by category.")
