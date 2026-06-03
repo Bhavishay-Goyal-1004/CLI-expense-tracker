@@ -14,16 +14,25 @@ def add_expense():
     file = open("expense.txt", "a") 
     file.write(f"\n{date},{amt},{category},{note}") 
     file.close()
+
+    print("Expense added successfully!")
     
 def view_expense():
-    file = open("expense.txt","r")
-    total=0
-    next(file)
-    for line in file:
-        date,amt,category,note=line.split(",")
-        print(f"{date}\t{amt}\t{category}\t{note}")
-        total+=float(amt)
-    print("\nTotal Expense: ",total)
+    file = open("expense.txt", "r") 
+    total = 0 
+    print("\n==============================================================") 
+    print(f"{'Date':<15}{'Amount':<12}{'Category':<18}{'Note'}") 
+    print("==============================================================") 
+    for line in file: 
+        line = line.strip() 
+        if line == "": 
+            continue 
+        date, amt, category, note = line.split(",") 
+        print(f"{date:<15}{amt:<12}{category:<18}{note}") 
+        total += float(amt) 
+    print("==============================================================") 
+    print(f"Total Expense: {total}") 
+    print("==============================================================\n") 
     file.close()
 
 def filter_category():
