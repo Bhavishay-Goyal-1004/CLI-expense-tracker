@@ -23,6 +23,7 @@ def view_expense():
     print("\n==============================================================") 
     print(f"{'Date':<15}{'Amount':<12}{'Category':<18}{'Note'}") 
     print("==============================================================") 
+    next(file)
     for line in file: 
         line = line.strip() 
         if line == "": 
@@ -48,7 +49,7 @@ def filter_category():
             continue
         date,amt,category,note=line.split(",")
         if (category.lower()==category_i.lower()):
-            print(f"{date}\t{amt}\t{category}\t{note}")
+            print(f"{date:<15}{amt:<12}{category:<18}{note}")
             total+=float(amt)
     print("==============================================================") 
     print(f"Subtotal Expense: {total}") 
