@@ -1,10 +1,18 @@
 def add_expense():
     date=input("Enter Date (DD/MM/YYYY): ")
-    amt=float(input("Enter Amount: "))
-    category=input("Enter Category (Food/Transport/Entertainment/Other): ")
-    note=input("Enter a note (otherwise NA):")
-    file = open("expense.txt","a")
-    file.write(f"\n{date},{amt},{category},{note}")
+    while True: 
+        try: 
+            amt = float(input("Enter Amount: ")) 
+            break 
+        except ValueError: 
+            print("Invalid amount! Please enter a number.")
+    
+    category = input("Enter Category (Food/Transport/Entertainment/Other): ") 
+    note = input("Enter a note (otherwise press Enter): ")
+    if note == "": 
+        note = "NA" 
+    file = open("expense.txt", "a") 
+    file.write(f"\n{date},{amt},{category},{note}") 
     file.close()
     
 def view_expense():
