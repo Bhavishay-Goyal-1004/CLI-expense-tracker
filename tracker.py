@@ -14,6 +14,16 @@ def view_expense():
         print(f"{date}\t{amt}\t{category}\t{note}")
     file.close()
 
+def filter_category():
+    file = open("expense.txt","r")
+    category_i=input("Enter the category to view expenses: ")
+    print("Date\tAmount\tCategory\tNote")
+    for line in file:
+        date,amt,category,note=line.split(",")
+        if (category==category_i):
+            print(f"{date}\t{amt}\t{category}\t{note}")
+    file.close()
+
 while True:
     print("========Welcome to Expense Tracker!========")
     print("1. Add an expense.")
