@@ -1,0 +1,2 @@
+Date,Amount,Category,Note
+10/04/2007,125.5,Food,NA
