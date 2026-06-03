@@ -4,10 +4,16 @@ def add_expense():
     category=input("Enter Category (Food/Transport/Entertainment/Other): ")
     note=input("Enter a note (otherwise NA):")
     file = open("expense.txt","a")
-    file.write(f"{date},{amt},{category},{note}")
+    file.write(f"\n{date},{amt},{category},{note}")
     file.close()
     
-    
+def view_expense():
+    file = open("expense.txt","r")
+    for line in file:
+        date,amt,category,note=line.split(",")
+        print(f"{date}\t{amt}\t{category}\t{note}")
+    file.close()
+
 while True:
     print("========Welcome to Expense Tracker!========")
     print("1. Add an expense.")
