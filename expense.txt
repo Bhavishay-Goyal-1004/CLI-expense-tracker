@@ -2,10 +2,3 @@ Date,Amount,Category,Note
 01/06/2026,250,Food,Burger 
 02/06/2026,120,Transport,Metro Ticket 
 03/06/2026,500,Entertainment,Movie 
-04/06/2026,80,Food,Coffee 
-05/06/2026,1000,Other,Books 
-06/06/2026,60,Transport,Bus Fare 
-07/06/2026,350,Food,Dinner 
-08/06/2026,700,Entertainment,Gaming 
-09/06/2026,150,Other,Stationery 
-10/06/2026,90,Food,Snacks
