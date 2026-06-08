@@ -1,15 +1,25 @@
 import os
 
 def add_expense():
+    """Prompts user for expense details and saves to expense.txt."""
     date=input("Enter Date (DD/MM/YYYY): ")
     while True: 
         try: 
-            amt = float(input("Enter Amount: ")) 
+            amt = float(input("Enter Amount: "))
+            if amt <= 0:
+                print("Amount must be greater than 0.")
+                continue
             break 
         except ValueError: 
             print("Invalid amount! Please enter a number.")
     
-    category = input("Enter Category (Food/Transport/Entertainment/Other): ") 
+    valid = ["food", "transport", "entertainment", "other"]
+    while True:
+        category = input("Enter Category (Food/Transport/Entertainment/Other): ")
+        if category.lower() in valid:
+            category = category.capitalize()  
+            break
+        print("Invalid category! Choose from Food/Transport/Entertainment/Other.") 
     note = input("Enter a note (otherwise press Enter): ")
     if note == "": 
         note = "NA" 
@@ -19,6 +29,7 @@ def add_expense():
     print("Expense added successfully!")
     
 def view_expense():
+    """Reads expenses from expense.txt and displays them in a formatted table."""
     if not os.path.exists("expense.txt"): 
         print("No expenses recorded yet.")
         return
@@ -27,18 +38,24 @@ def view_expense():
         print("\n==============================================================") 
         print(f"{'Date':<15}{'Amount':<12}{'Category':<18}{'Note'}") 
         print("==============================================================")
+        found = False
         for line in file: 
             line = line.strip() 
             if line == "": 
                 continue 
-            date, amt, category, note = line.split(",") 
+            found = True
+            date, amt, category, note = line.split(",", 3) 
             print(f"{date:<15}{float(amt):<12.2f}{category:<18}{note}") 
-            total += float(amt) 
-        print("==============================================================") 
-        print(f"Total Expense: {total:.2f}") 
-        print("==============================================================\n") 
+            total += float(amt)
+        if not found:
+            print("No expenses recorded yet.")
+        else:
+            print("==============================================================") 
+            print(f"Total Expense: {total:.2f}") 
+            print("==============================================================\n") 
 
 def filter_category():
+    """Prompts user for a category and displays expenses that match the category."""
     if not os.path.exists("expense.txt"):  
         print("No expenses recorded yet.")
         return
@@ -48,17 +65,22 @@ def filter_category():
         print("\n==============================================================") 
         print(f"{'Date':<15}{'Amount':<12}{'Category':<18}{'Note'}") 
         print("==============================================================")
+        found = False
         for line in file:
             line = line.strip() 
             if line == "": 
                 continue
-            date,amt,category,note=line.split(",")
+            date,amt,category,note=line.split(",",3)
             if (category.lower()==category_i.lower()):
+                found = True
                 print(f"{date:<15}{float(amt):<12.2f}{category:<18}{note}")
                 total+=float(amt)
-        print("==============================================================") 
-        print(f"Subtotal Expense: {total:.2f}") 
-        print("==============================================================\n") 
+        if not found:
+            print(f"No expenses found for category '{category_i}'.")
+        else:
+            print("==============================================================") 
+            print(f"Subtotal Expense: {total:.2f}") 
+            print("==============================================================\n") 
 
 def main():
     while True:
